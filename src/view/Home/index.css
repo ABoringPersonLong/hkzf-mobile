@@ -1,20 +1,25 @@
 .home-container {
-  display: flex;
-  flex-direction: column;
   height: 100vh;
 }
-.top {
-  flex: 0;
-  border-bottom: solid 1px var(--adm-color-border);
-}
 .body {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 13.33333333vw;
 }
 .bottom {
-  flex: 0;
+  position: fixed;
+  bottom: 0;
   border-top: solid 1px var(--adm-color-border);
+  width: 100vw;
+  height: 13.33333333vw;
+  background-color: #fff;
+  z-index: 999;
+}
+.bottom .adm-tab-bar-item-active {
+  color: #21b97a;
+}
+.iconfont {
+  font-size: 5.33333333vw;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,21 +1,23 @@
 import './index.css'
-import React, {FC} from 'react'
 import {Routes, Route, useNavigate, useLocation} from 'react-router-dom'
-import {NavBar, TabBar} from 'antd-mobile'
-import {AppOutline, UnorderedListOutline, MessageOutline, UserOutline} from 'antd-mobile-icons'
+import {TabBar} from 'antd-mobile'
+import Index from '../Index'
+import HouseList from '../HouseList'
+import News from '../News'
+import Profile from '../Profile'
 
-const Bottom: FC = () => {
+const Bottom = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1) // 截取最后一个路径，例如 /aaa/bbb 截取出 bbb
+  const {pathname} = location
 
   const setRouteActive = (value: string) => navigate(value)
 
   const tabs = [
-    {key: 'home2', title: '首页', icon: <AppOutline/>},
-    {key: 'todo', title: '我的待办', icon: <UnorderedListOutline/>},
-    {key: 'message', title: '我的消息', icon: <MessageOutline/>},
-    {key: 'me', title: '个人中心', icon: <UserOutline/>}
+    {key: '/home', title: '首页', icon: (<i className='iconfont icon-ind'/>)},
+    {key: '/home/houselist', title: '找房', icon: (<i className='iconfont icon-findHouse'/>)},
+    {key: '/home/news', title: '咨询', icon: (<i className='iconfont icon-infom'/>)},
+    {key: '/home/profile', title: '我的', icon: (<i className='iconfont icon-my'/>)}
   ]
 
   return (
@@ -25,34 +27,15 @@ const Bottom: FC = () => {
   )
 }
 
-function Home2() {
-  return <div>首页</div>
-}
-
-function Todo() {
-  return <div>我的待办</div>
-}
-
-function Message() {
-  return <div>我的消息</div>
-}
-
-function PersonalCenter() {
-  return <div>个人中心</div>
-}
-
 const Home = () => {
   return (
     <div className='home-container'>
-      <div className='top'>
-        <NavBar>配合路由使用</NavBar>
-      </div>
       <div className='body'>
         <Routes>
-          <Route path='home2' element={<Home2/>}/>
-          <Route path='todo' element={<Todo/>}/>
-          <Route path='message' element={<Message/>}/>
-          <Route path='me' element={<PersonalCenter/>}/>
+          <Route path='/' element={<Index/>}/>
+          <Route path='/houselist' element={<HouseList/>}/>
+          <Route path='/news' element={<News/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Routes>
       </div>
       <div className='bottom'>

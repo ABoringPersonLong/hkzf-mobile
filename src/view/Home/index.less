@@ -1,22 +1,30 @@
+@vw: 3.75vw;
+
 .home-container {
-  display: flex;
-  flex-direction: column;
   height: 100vh;
 }
 
-.top {
-  flex: 0;
-  border-bottom: solid 1px var(--adm-color-border);
-}
-
 .body {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: (50 / @vw);
 }
 
 .bottom {
-  flex: 0;
+  position: fixed;
+  bottom: 0;
   border-top: solid 1px var(--adm-color-border);
+  width: 100vw;
+  height: (50 / @vw);
+  background-color: #fff;
+  z-index: 999;
+
+  .adm-tab-bar-item-active {
+    color: #21b97a;
+  }
+}
+
+.iconfont {
+  font-size: (20 / @vw);
 }
