@@ -1,10 +1,13 @@
 import './index.scss'
-import {useState, useEffect} from "react"
+import {useState, useEffect, createRef} from "react"
 import {useNavigate} from "react-router-dom"
+
 // 按需导入 antd-mobile 组件库
 import {Swiper, Toast, Grid} from 'antd-mobile'
-// 导入 homeAPI 模块
-import {getSwiperAPI} from '../../api/homeAPI'
+
+// 按需导入 homeAPI 模块
+import {getSwiperAPI, getGroupsAPI} from '../../api/homeAPI'
+
 // 导入导航菜单的图片
 import Nav1 from '../../assets/images/nav-1.png'
 import Nav2 from '../../assets/images/nav-2.png'
@@ -45,21 +48,30 @@ const Index = () => {
   const [swipers, setSwipers] = useState([{id: 0, imgSrc: '', alt: ''}])
   // 是否已加载轮播图数据
   const [isSwipersLoaded, setIsSwipersLoaded] = useState(false)
+  // 租房小组数据
+  const [groups, setGroups] = useState([{id: 0, title: '', desc: '', imgSrc: ''}])
 
   const navigate = useNavigate()
 
   // 获取轮播图数据
-  const getSwipers = async (): Promise<void> => {
+  const getSwipers = async () => {
     const {data} = await getSwiperAPI()
     if (data.status !== 200) Toast.show(data.description)
     setSwipers(data.body)
     setIsSwipersLoaded(true)
-    console.log(data)
+  }
+
+  // 获取轮播图数据
+  const getGroups = async () => {
+    const {data} = await getGroupsAPI('AREA%7C88cff55c-aaa4-e2e0')
+    if (data.status !== 200) Toast.show(data.description)
+    setGroups(data.body)
   }
 
   // 发送异步请求
   useEffect(() => {
     getSwipers()
+    getGroups()
   }, [])
 
   return (
@@ -78,12 +90,12 @@ const Index = () => {
                 ))
               }
             </Swiper>
-          ): ('')
+          ) : ('')
         }
       </div>
 
       {/* 导航菜单 */}
-      <Grid columns={4}>
+      <Grid columns={4} className='nav'>
         {
           navs.map(item => (
             <Grid.Item key={item.id} onClick={() => navigate(item.path)}>
@@ -93,8 +105,45 @@ const Index = () => {
           ))
         }
       </Grid>
+
+      {/* 租房小组 */}
+      <div className='group'>
+        <h3 className='group-title'>
+          租房小组<span className='more'>更多</span>
+        </h3>
+        <Grid columns={2} gap={10}>
+          {
+            groups.map(item => (
+              <Grid.Item key={item.id}>
+                <div className='info'>
+                  <p>{item.title}</p>
+                  <span>{item.desc}</span>
+                </div>
+                <img src={'http://localhost:8080' + item.imgSrc} alt=""/>
+              </Grid.Item>
+            ))
+          }
+        </Grid>
+      </div>
+
+      {/* 最新资讯 */}
+      <div></div>
     </div>
   )
 }
+
+// 操作 DOM
+window.addEventListener('load', () => {
+  document.querySelectorAll('.group .adm-grid-item').forEach(item => {
+    item.addEventListener('touchstart', function () {
+      // @ts-ignore
+      this.style.backgroundColor = '#daddda'
+    })
+    item.addEventListener('touchend', function () {
+      // @ts-ignore
+      this.style.backgroundColor = '#fff'
+    })
+  })
+})
 
 export default Index

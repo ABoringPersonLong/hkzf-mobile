@@ -1,7 +1,9 @@
 import './index.scss'
 import {Routes, Route, useNavigate, useLocation} from 'react-router-dom'
+
 // 按需导入 antd-mobile 组件库
 import {TabBar} from 'antd-mobile'
+
 // 导入路由需要的组件
 import Index from '../Index'
 import HouseList from '../HouseList'
@@ -18,7 +20,7 @@ const Bottom = () => {
   const tabs = [
     {key: '/home', title: '首页', icon: (<i className='iconfont icon-ind'/>)},
     {key: '/home/houselist', title: '找房', icon: (<i className='iconfont icon-findHouse'/>)},
-    {key: '/home/news', title: '咨询', icon: (<i className='iconfont icon-infom'/>)},
+    {key: '/home/news', title: '资讯', icon: (<i className='iconfont icon-infom'/>)},
     {key: '/home/profile', title: '我的', icon: (<i className='iconfont icon-my'/>)}
   ]
 

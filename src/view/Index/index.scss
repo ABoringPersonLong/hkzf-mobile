@@ -1,18 +1,21 @@
 $vw: 3.75;
 
+// index 容器宽度
 .index-container {
   width: 100vw;
 }
 
+// 轮播图高度
 .swiper {
   height: (215vw / $vw);
+
+  .content {
+    width: 100vw;
+  }
 }
 
-.content {
-  width: 100vw;
-}
-
-.adm-grid {
+// 导航菜单
+.nav {
   padding: (10vw / $vw) 0;
 
   .adm-grid-item {
@@ -26,5 +29,54 @@ $vw: 3.75;
   h2 {
     font-size: (13vw / $vw);
     font-weight: normal;
+  }
+}
+
+// 租房小组
+.group {
+  padding: (10vw / $vw);
+  background-color: #f6f5f6;
+  overflow: hidden;
+
+  .group-title {
+    position: relative;
+    margin: (5vw / $vw) 0 (15vw / $vw) (10vw / $vw);
+    font-size: (15vw / $vw);
+
+    .more {
+      position: absolute;
+      right: 0;
+      color: #787d82;
+      font-size: (14vw / $vw);
+      font-weight: normal;
+    }
+  }
+
+  .adm-grid {
+    .adm-grid-item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-radius: (5vw / $vw);
+      height: (75vw / $vw);
+      background-color: #fff;
+
+      .info {
+        p {
+          margin-bottom: (5vw / $vw);
+          font-size: (13vw / $vw);
+          font-weight: bold;
+        }
+
+        span {
+          font-size: (12vw / $vw);
+          color: #999;
+        }
+      }
+
+      img {
+        width: (55vw / $vw);
+      }
+    }
   }
 }
