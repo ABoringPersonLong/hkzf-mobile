@@ -1,4 +1,4 @@
-@vw: 3.75vw;
+$vw: 3.75;
 
 .home-container {
   height: 100vh;
@@ -8,15 +8,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: (50 / @vw);
+  padding-bottom: (50vw / $vw);
 }
 
 .bottom {
   position: fixed;
   bottom: 0;
-  border-top: solid 1px var(--adm-color-border);
+  border-top: (1vw / $vw) solid var(--adm-color-border);
   width: 100vw;
-  height: (50 / @vw);
+  height: (50vw / $vw);
   background-color: #fff;
   z-index: 999;
 
@@ -26,5 +26,5 @@
 }
 
 .iconfont {
-  font-size: (20 / @vw);
+  font-size: (2vw / $vw);
 }

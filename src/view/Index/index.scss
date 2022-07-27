@@ -1,0 +1,30 @@
+$vw: 3.75;
+
+.index-container {
+  width: 100vw;
+}
+
+.swiper {
+  height: (215vw / $vw);
+}
+
+.content {
+  width: 100vw;
+}
+
+.adm-grid {
+  padding: (10vw / $vw) 0;
+
+  .adm-grid-item {
+    text-align: center;
+  }
+
+  img {
+    width: (48vw / $vw);
+  }
+
+  h2 {
+    font-size: (13vw / $vw);
+    font-weight: normal;
+  }
+}

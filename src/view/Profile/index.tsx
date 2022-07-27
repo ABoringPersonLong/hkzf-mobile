@@ -1,5 +1,9 @@
 const Profile = () => {
-  return (<div>我的</div>)
+  return (
+    <div className='profile-container'>
+      我的
+    </div>
+  )
 }
 
 export default Profile

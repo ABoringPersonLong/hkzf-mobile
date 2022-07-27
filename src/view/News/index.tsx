@@ -1,5 +1,9 @@
 const News = () => {
-  return (<div>咨询</div>)
+  return (
+    <div className='news-container'>
+      咨询
+    </div>
+  )
 }
 
 export default News

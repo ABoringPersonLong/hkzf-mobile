@@ -1,5 +1,6 @@
+// 导入图标库
 import './assets/fonts/iconfont.css'
-import './index.css'
+import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
