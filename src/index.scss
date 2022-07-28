@@ -8,12 +8,20 @@ $vw: 3.75;
 
 html,
 body {
-  height: 100vh;
+  height: 100%;
   font-family: 'Microsoft YaHei', serif;
   color: #333;
   background-color: #fff;
-}
 
-h2 {
-  margin-top: (7vw / $vw);
+  #root {
+    height: 100%;
+
+    .app-container {
+      height: 100%;
+
+      #container {
+        height: 100%;
+      }
+    }
+  }
 }

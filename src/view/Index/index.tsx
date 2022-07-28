@@ -1,12 +1,14 @@
 import './index.scss'
-import {useState, useEffect, createRef} from "react"
+import {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom"
 
 // 按需导入 antd-mobile 组件库
 import {Swiper, Toast, Grid} from 'antd-mobile'
 
 // 按需导入 homeAPI 模块
-import {getSwiperAPI, getGroupsAPI} from '../../api/homeAPI'
+import {getSwiperAPI, getGroupsAPI, getNewsAPI} from '../../api/homeAPI'
+// 按需导入 areaAPI 模块
+import {getInfoAPI} from '../../api/areaAPI'
 
 // 导入导航菜单的图片
 import Nav1 from '../../assets/images/nav-1.png'
@@ -50,7 +52,12 @@ const Index = () => {
   const [isSwipersLoaded, setIsSwipersLoaded] = useState(false)
   // 租房小组数据
   const [groups, setGroups] = useState([{id: 0, title: '', desc: '', imgSrc: ''}])
+  // 资讯数据
+  const [news, setNews] = useState([{id: 0, title: '', imgSrc: '', from: '', date: ''}])
+  // 当前城市名称
+  const [curCityName, setCurCityName] = useState('')
 
+  // 使用编程式跳转
   const navigate = useNavigate()
 
   // 获取轮播图数据
@@ -61,17 +68,47 @@ const Index = () => {
     setIsSwipersLoaded(true)
   }
 
-  // 获取轮播图数据
+  // 获取租房小组数据
   const getGroups = async () => {
     const {data} = await getGroupsAPI('AREA%7C88cff55c-aaa4-e2e0')
     if (data.status !== 200) Toast.show(data.description)
     setGroups(data.body)
   }
 
-  // 发送异步请求
+  // 获取资讯数据
+  const getNews = async () => {
+    const {data} = await getNewsAPI('AREA%7C88cff55c-aaa4-e2e0')
+    if (data.status !== 200) Toast.show(data.description)
+    setNews(data.body)
+  }
+
+  // 组件挂载时执行
   useEffect(() => {
     getSwipers()
     getGroups()
+    getNews()
+
+    // 租房小组按住背景变灰
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.group .adm-grid-item').forEach(item => {
+        item.addEventListener('touchstart', function () {
+          // @ts-ignore
+          this.style.backgroundColor = '#daddda'
+        })
+        item.addEventListener('touchend', function () {
+          // @ts-ignore
+          this.style.backgroundColor = '#fff'
+        })
+      })
+    })
+
+    // 通过 IP 定位获取到当前城市的名称
+    // @ts-ignore
+    new window.BMapGL.LocalCity().get(async (result: {name: string}) => {
+      const {data} = await getInfoAPI(result.name)
+      if (data.status !== 200) Toast.show(data.description)
+      setCurCityName(data.body.label)
+    })
   }, [])
 
   return (
@@ -85,13 +122,28 @@ const Index = () => {
               {
                 swipers.map(item => (
                   <Swiper.Item key={item.id}>
-                    <img src={'http://localhost:8080' + item.imgSrc} alt={item.alt} className='content'/>
+                    <img src={`http://localhost:8080${item.imgSrc}`} alt={item.alt} className='content'/>
                   </Swiper.Item>
                 ))
               }
             </Swiper>
           ) : ('')
         }
+
+        {/* 搜索框 */}
+        <div className='search-box'>
+          <div className='search'>
+            <div className='location' onClick={() => navigate('/citylist')}>
+              <span>{curCityName}</span>
+              <i className="iconfont icon-arrow"/>
+            </div>
+            <div className='form' onClick={() => navigate('/search')}>
+              <i className="iconfont icon-seach"/>
+              <span>请输入小区或地址</span>
+            </div>
+          </div>
+          <i className="iconfont icon-map" onClick={() => navigate('/map')}/>
+        </div>
       </div>
 
       {/* 导航菜单 */}
@@ -119,7 +171,7 @@ const Index = () => {
                   <p>{item.title}</p>
                   <span>{item.desc}</span>
                 </div>
-                <img src={'http://localhost:8080' + item.imgSrc} alt=""/>
+                <img src={`http://localhost:8080${item.imgSrc}`} alt=""/>
               </Grid.Item>
             ))
           }
@@ -127,23 +179,25 @@ const Index = () => {
       </div>
 
       {/* 最新资讯 */}
-      <div></div>
+      <div className="news">
+        <h3 className="title">最新资讯</h3>
+        {
+          news.map(item => (
+            <div className='news-item' key={item.id}>
+              <img src={`http://localhost:8080${item.imgSrc}`} alt=""/>
+              <div className='content'>
+                <h3>{item.title}</h3>
+                <div className='info'>
+                  <span>{item.from}</span>
+                  <span>{item.date}</span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }
-
-// 操作 DOM
-window.addEventListener('load', () => {
-  document.querySelectorAll('.group .adm-grid-item').forEach(item => {
-    item.addEventListener('touchstart', function () {
-      // @ts-ignore
-      this.style.backgroundColor = '#daddda'
-    })
-    item.addEventListener('touchend', function () {
-      // @ts-ignore
-      this.style.backgroundColor = '#fff'
-    })
-  })
-})
 
 export default Index

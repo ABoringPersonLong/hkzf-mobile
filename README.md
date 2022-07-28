@@ -1,3 +1,7 @@
+# 描述
+
+这是一款租房APP，目前主要使用百度API的场景是用于定位用户位置信息，获取用户位置信息推荐一些相关的数据信息，用户可以切换定位的城市，然后点击地图导航之后会展示定位的城市以及周围小区的信息，点击小区会展示该小区下所有的房屋信息，点击房屋信息会展示所有的房屋列表，再点击指定的房屋就会跳转到房屋的详情页面。
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
