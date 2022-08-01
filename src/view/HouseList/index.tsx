@@ -1,6 +1,7 @@
+// HouseList 组件
 const HouseList = () => {
   return (
-    <div className='houselist-container'>
+    <div className='house-list-container'>
       找房
     </div>
   )

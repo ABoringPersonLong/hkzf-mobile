@@ -1,7 +1,16 @@
+$vw: 3.75;
+
 .map-container {
+  padding-top: (45vw / $vw);
   height: 100%;
 
-  #container {
+  // 顶部导航栏
+  .adm-nav-bar {
+    margin-top: (-45vw / $vw);
+  }
+
+  // 地图
+  #allmap {
     height: 100%;
   }
 }

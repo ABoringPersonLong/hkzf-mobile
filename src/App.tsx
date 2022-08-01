@@ -1,10 +1,11 @@
+import {FC} from 'react'
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 import Home from './view/Home'
 import CityList from './view/CityList'
 import Map from './view/Map'
 
 // App 组件
-const App = () => {
+const App: FC = () => {
   return (
     <BrowserRouter>
       <div className="app-container">

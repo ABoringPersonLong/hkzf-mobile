@@ -1,14 +1,14 @@
 import './index.scss'
-import {useState, useEffect} from "react"
-import {useNavigate} from "react-router-dom"
+import {useState, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 // 按需导入 antd-mobile 组件库
 import {Swiper, Toast, Grid} from 'antd-mobile'
 
 // 按需导入 homeAPI 模块
 import {getSwiperAPI, getGroupsAPI, getNewsAPI} from '../../api/homeAPI'
-// 按需导入 areaAPI 模块
-import {getInfoAPI} from '../../api/areaAPI'
+// 导入获取当前城市方法
+import {getCurrentCity} from '../../utils'
 
 // 导入导航菜单的图片
 import Nav1 from '../../assets/images/nav-1.png'
@@ -63,7 +63,7 @@ const Index = () => {
   // 获取轮播图数据
   const getSwipers = async () => {
     const {data} = await getSwiperAPI()
-    if (data.status !== 200) Toast.show(data.description)
+    if (data.status !== 200) return Toast.show(data.description)
     setSwipers(data.body)
     setIsSwipersLoaded(true)
   }
@@ -71,14 +71,14 @@ const Index = () => {
   // 获取租房小组数据
   const getGroups = async () => {
     const {data} = await getGroupsAPI('AREA%7C88cff55c-aaa4-e2e0')
-    if (data.status !== 200) Toast.show(data.description)
+    if (data.status !== 200) return Toast.show(data.description)
     setGroups(data.body)
   }
 
   // 获取资讯数据
   const getNews = async () => {
     const {data} = await getNewsAPI('AREA%7C88cff55c-aaa4-e2e0')
-    if (data.status !== 200) Toast.show(data.description)
+    if (data.status !== 200) return Toast.show(data.description)
     setNews(data.body)
   }
 
@@ -102,13 +102,8 @@ const Index = () => {
       })
     })
 
-    // 通过 IP 定位获取到当前城市的名称
-    // @ts-ignore
-    new window.BMapGL.LocalCity().get(async (result: {name: string}) => {
-      const {data} = await getInfoAPI(result.name)
-      if (data.status !== 200) Toast.show(data.description)
-      setCurCityName(data.body.label)
-    })
+    // 获取当前城市
+    getCurrentCity().then((response: any) => setCurCityName(response.label))
   }, [])
 
   return (

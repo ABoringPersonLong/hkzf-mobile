@@ -1,0 +1,10 @@
+$vw: 3.75;
+
+.nav-header-container {
+  .adm-nav-bar {
+    border-bottom: (1vw / $vw) solid #ccc;
+    width: 100%;
+    background-color: #f6f5f6;
+    z-index: 999;
+  }
+}

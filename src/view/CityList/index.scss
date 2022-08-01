@@ -1,0 +1,59 @@
+$vw: 3.75;
+
+.city-list-container {
+  padding-top: (45vw / $vw);
+  height: 100%;
+
+  .adm-nav-bar {
+    margin-top: (-45vw / $vw);
+  }
+
+  // 城市列表
+  .city {
+    .title {
+      padding: (10vw / $vw) (15vw / $vw);
+      height: (36vw / $vw);
+      color: #999;
+      font-size: (14vw / $vw);
+    }
+
+    .name {
+      border-bottom: (1vw / $vw) solid #eee;
+      padding: 0 (15vw / $vw);
+      width: 100%;
+      height: (50vw / $vw);
+      background: #fff;
+      color: #333;
+      font-size: (16vw / $vw);
+      line-height: (50vw / $vw);
+      cursor: pointer;
+    }
+  }
+
+  // 右侧索引
+  .city-index {
+    position: absolute;
+    right: (5vw / $vw);
+    display: flex;
+    flex-direction: column;
+    padding-top: (20vw / $vw);
+    height: 90%;
+    text-align: center;
+    z-index: 1;
+
+    .city-index-item {
+      flex: 1;
+    }
+
+    .index-active {
+      display: inline-block;
+      border-radius: 100%;
+      width: (15vw / $vw);
+      height: (15vw / $vw);
+      background-color: #21b97a;
+      color: #fff;
+      font-size: (12vw / $vw);
+      line-height: (15vw / $vw);
+    }
+  }
+}
