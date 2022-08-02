@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 // 按需导入 antd-mobile 组件库
-import {NavBar, Toast} from 'antd-mobile'
+import {Toast} from 'antd-mobile'
 
 // 按需导入 react-virtualized 组件
 // @ts-ignore

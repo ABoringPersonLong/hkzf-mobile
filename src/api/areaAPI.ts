@@ -8,3 +8,6 @@ export const getCityAPI = (level: number) => request.get('/area/city', {params: 
 
 // 获取热门城市数据
 export const getHotAPI = () => request.get('/area/hot')
+
+// 查询房源数据
+export const getMapAPI = (id: string) => request.get('/area/map', {params: {id}})
