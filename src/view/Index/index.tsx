@@ -87,7 +87,7 @@ const Index = () => {
     }
   }
 
-  // 获取资讯数据
+  // 获取资讯数据llll
   const getNews = async () => {
     try {
       Toast.show({icon: 'loading', content: '加载中...', duration: 0})

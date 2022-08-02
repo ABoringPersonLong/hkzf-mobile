@@ -75,22 +75,17 @@ const CityList = () => {
 
   // 初始化城市列表数据
   const initCityData = async () => {
-    try {
-      Toast.show({icon: 'loading', content: '加载中...', duration: 0})
-      // 获取城市列表数据，并格式化出 cityList 和 cityIndex 两个列表
-      const {data} = await getCityAPI(1)
-      if (data.status !== 200) Toast.show(data.description)
-      const {cityList, cityIndex} = formatCityData(data.body)
+    Toast.show({icon: 'loading', content: '加载中...', duration: 0})
+    // 获取城市列表数据，并格式化出 cityList 和 cityIndex 两个列表
+    const {data} = await getCityAPI(1)
+    if (data.status !== 200) Toast.show(data.description)
+    const {cityList, cityIndex} = formatCityData(data.body)
 
-      // 获取热门城市数据
-      const response = await getHotAPI()
-      if (response.data.status !== 200) return Toast.show(response.data.description)
-      cityList['hot'] = response.data.body
-      cityIndex.unshift('hot')
-      Toast.clear()
-    } catch (e) {
-      Toast.clear()
-    }
+    // 获取热门城市数据
+    const response = await getHotAPI()
+    if (response.data.status !== 200) return Toast.show(response.data.description)
+    cityList['hot'] = response.data.body
+    cityIndex.unshift('hot')
 
     // 获取当前城市
     const curCity: any = await getCurrentCity()
@@ -98,6 +93,7 @@ const CityList = () => {
     cityIndex.unshift('#')
     setCityList(cityList)
     setCityIndex(cityIndex)
+    Toast.clear()
   }
 
   // 点击切换城市
