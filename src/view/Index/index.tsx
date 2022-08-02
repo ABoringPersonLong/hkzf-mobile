@@ -62,24 +62,42 @@ const Index = () => {
 
   // 获取轮播图数据
   const getSwipers = async () => {
-    const {data} = await getSwiperAPI()
-    if (data.status !== 200) return Toast.show(data.description)
-    setSwipers(data.body)
-    setIsSwipersLoaded(true)
+    try {
+      Toast.show({icon: 'loading', content: '加载中...', duration: 0})
+      const {data} = await getSwiperAPI()
+      if (data.status !== 200) return Toast.show(data.description)
+      setSwipers(data.body)
+      setIsSwipersLoaded(true)
+      Toast.clear()
+    } catch (e) {
+      Toast.clear()
+    }
   }
 
   // 获取租房小组数据
   const getGroups = async () => {
-    const {data} = await getGroupsAPI('AREA%7C88cff55c-aaa4-e2e0')
-    if (data.status !== 200) return Toast.show(data.description)
-    setGroups(data.body)
+    try {
+      Toast.show({icon: 'loading', content: '加载中...', duration: 0})
+      const {data} = await getGroupsAPI('AREA%7C88cff55c-aaa4-e2e0')
+      if (data.status !== 200) return Toast.show(data.description)
+      setGroups(data.body)
+      Toast.clear()
+    } catch (e) {
+      Toast.clear()
+    }
   }
 
   // 获取资讯数据
   const getNews = async () => {
-    const {data} = await getNewsAPI('AREA%7C88cff55c-aaa4-e2e0')
-    if (data.status !== 200) return Toast.show(data.description)
-    setNews(data.body)
+    try {
+      Toast.show({icon: 'loading', content: '加载中...', duration: 0})
+      const {data} = await getNewsAPI('AREA%7C88cff55c-aaa4-e2e0')
+      if (data.status !== 200) return Toast.show(data.description)
+      setNews(data.body)
+      Toast.clear()
+    } catch (e) {
+      Toast.clear()
+    }
   }
 
   // 组件挂载时执行
