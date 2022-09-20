@@ -207,10 +207,12 @@ const Map = () => {
     label.addEventListener("click", () => {
       // 以当前点击的覆盖物为中心放大地图
       map.centerAndZoom(point, zoom)
-      // 清除当前覆盖物信息
-      map.clearOverlays()
-      // 调用 renderOverlays 方法，获取该区域下的房源数据
-      renderOverlays(id)
+      setTimeout(() => { // 为了防止点太快，延迟 100 毫秒再执行
+        // 清除当前覆盖物信息
+        map.clearOverlays()
+        // 调用 renderOverlays 方法，获取该区域下的房源数据
+        renderOverlays(id)
+      }, 100)
     })
 
     // 将文本标注添加到地图中
